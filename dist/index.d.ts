@@ -14,6 +14,7 @@ export declare type IProps = {
     getCurrentPinLength?: (length: number) => void;
     handleResultEnterPin?: any;
     iconComponentLockedPage?: any;
+    requiresConfirm?: boolean;
     iconButtonDeleteDisabled?: boolean;
     lockedPage?: any;
     maxAttempts?: number;

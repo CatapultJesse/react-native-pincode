@@ -7,11 +7,24 @@ const Keychain = require("react-native-keychain");
 class PinCodeChoose extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.endProcessCreation = (pinCode, isErrorValidation) => {
-            this.setState({
-                pinCode: isErrorValidation ? '' : pinCode,
-                status: isErrorValidation ? PinCode_1.PinStatus.choose : PinCode_1.PinStatus.confirm
-            });
+        this.endProcessCreation = async (pinCode, isErrorValidation) => {
+            if (!this.props.requiresConfirm) {
+                if (this.props.storePin) {
+                    this.props.storePin(pinCode);
+                }
+                else {
+                    await Keychain.setGenericPassword(this.props.pinCodeKeychainName, pinCode);
+                }
+                if (this.props.finishProcess) {
+                    this.props.finishProcess();
+                }
+            }
+            else {
+                this.setState({
+                    pinCode: isErrorValidation ? '' : pinCode,
+                    status: isErrorValidation ? PinCode_1.PinStatus.choose : PinCode_1.PinStatus.confirm
+                });
+            }
         };
         this.endProcessConfirm = async (pinCode) => {
             if (pinCode === this.state.pinCode) {

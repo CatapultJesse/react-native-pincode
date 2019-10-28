@@ -19,6 +19,7 @@ export type IProps = {
   getCurrentPinLength?: (length: number) => void
   handleResultEnterPin?: any
   iconComponentLockedPage?: any
+  requiresConfirm?: boolean
   iconButtonDeleteDisabled?: boolean
   lockedPage?: any
   maxAttempts?: number
@@ -186,6 +187,7 @@ class PINCode extends React.PureComponent<IProps, IState> {
           emptyColumnComponent={this.props.bottomLeftComponent}
           passwordComponent={this.props.passwordComponent}
           finishProcess={this.props.finishProcess || null}
+          requiresConfirm={this.props.requiresConfirm === undefined ? true : this.props.requiresConfirm}
           buttonNumberComponent={this.props.buttonNumberComponent}
           passwordLength={this.props.passwordLength}
           iconButtonDeleteDisabled={this.props.iconButtonDeleteDisabled}

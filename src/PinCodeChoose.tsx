@@ -23,6 +23,7 @@ export type IProps = {
   colorPassword?: string
   buttonDeleteText?: string
   colorPasswordError?: string
+  requiresConfirm?: boolean;
   iconButtonDeleteDisabled?: boolean
   numbersButtonOverlayColor?: string
   buttonDeleteComponent: any
@@ -76,11 +77,25 @@ class PinCodeChoose extends React.PureComponent<IProps, IState> {
     this.endProcessConfirm = this.endProcessConfirm.bind(this)
   }
 
-  endProcessCreation = (pinCode: string, isErrorValidation?: boolean) => {
-    this.setState({
-      pinCode: isErrorValidation ? '' : pinCode,
-      status: isErrorValidation ? PinStatus.choose : PinStatus.confirm
-    })
+  endProcessCreation = async (pinCode: string, isErrorValidation?: boolean) => {
+    if (!this.props.requiresConfirm) {
+      if (this.props.storePin) {
+        this.props.storePin(pinCode)
+      } else {
+        await Keychain.setGenericPassword(
+          this.props.pinCodeKeychainName,
+          pinCode
+        );
+      }
+      if (this.props.finishProcess) {
+        this.props.finishProcess();
+      }
+    } else {
+      this.setState({
+        pinCode: isErrorValidation ? '' : pinCode,
+        status: isErrorValidation ? PinStatus.choose : PinStatus.confirm
+      });
+    }
   }
 
   endProcessConfirm = async (pinCode: string) => {

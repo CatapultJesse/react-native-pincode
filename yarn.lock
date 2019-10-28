@@ -4769,9 +4769,10 @@ react-native-easy-grid@^0.2.0:
   dependencies:
     lodash "^4.11.1"
 
-react-native-keychain@^3.0.0-rc.3:
-  version "3.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-3.0.0-rc.3.tgz#891ea07a564d1bf46b644bc615af21f15a04b12b"
+react-native-keychain@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-4.0.1.tgz#c332f5d9aaf597255ae6ea4ca7d5c84a24684a1d"
+  integrity sha512-AqQp4Hib9y5DP5es5umEAhxKG7L0bA8cHNFhvlqs6oUcbUoKtXmhLDo3wzvnCF+bm8DXpGhvkU6P0LkfO0AgPQ==
 
 react-native-touch-id@^4.1.0:
   version "4.1.0"
